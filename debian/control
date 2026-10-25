@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Lingmo OS Team <team@lingmo.org>
 Build-Depends: cmake,
                dbus-daemon <!nocheck>,
-               debhelper-compat (= 14),
+               debhelper-compat (= 13),
                libheif-dev,
                libjxl-dev,
                librsvg2-dev,
