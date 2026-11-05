@@ -1,3 +1,12 @@
+lingmo-qt-plugins (5.0.1+lingmo5u1) unstable; urgency=medium
+
+  * platformtheme: fix build against Qt 6.11+ (Debian Testing).
+    handleThemeChange(QWindow*) was removed; now takes no arguments.
+    Replace per-window loop with the zero-argument overload.
+  * platformtheme: remove use of deprecated Qt::Desktop window type flag.
+
+ -- Lingmo OS Team <team@lingmo.org>  Thu, 05 Nov 2026 05:45:00 +0800
+
 lingmo-qt-plugins (5.0.0+lingmo5u1) unstable; urgency=medium
 
   * Move the packaging to https://github.com/lingmoos/packaging.

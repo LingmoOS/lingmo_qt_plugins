@@ -56,9 +56,7 @@ PlatformTheme::PlatformTheme()
             &PlatformTheme::onFontChanged);
     connect(m_hints, &HintsSettings::iconThemeChanged, this, &PlatformTheme::onIconThemeChanged);
     connect(m_hints, &HintsSettings::cursorThemeChanged, this, [] {
-        for (auto *window : qGuiApp->allWindows()) {
-            QWindowSystemInterface::handleThemeChange(window);
-        }
+        QWindowSystemInterface::handleThemeChange();
     });
     connect(m_hints, &HintsSettings::darkModeChanged, this, [] {
         QWindowSystemInterface::handleThemeChange();
@@ -149,7 +147,8 @@ void PlatformTheme::onIconThemeChanged()
 
     QEvent update(QEvent::UpdateRequest);
     for (QWindow *window : qGuiApp->allWindows()) {
-        if (window->type() == Qt::Desktop)
+        if (window->type() == Qt::Tool || window->type() == Qt::Popup
+                || window->type() == Qt::ToolTip)
             continue;
 
         qApp->sendEvent(window, &update);
