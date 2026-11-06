@@ -1,3 +1,9 @@
+lingmo-qt-plugins (5.0.1+lingmo5u2) unstable; urgency=medium
+
+  * i18n: use Qt standard file dialog translation contexts.
+
+ -- Lingmo OS Team <team@lingmo.org>  Sat, 07 Nov 2026 12:00:00 +0800
+
 lingmo-qt-plugins (5.0.1+lingmo5u1) unstable; urgency=medium
 
   * platformtheme: fix build against Qt 6.11+ (Debian Testing).

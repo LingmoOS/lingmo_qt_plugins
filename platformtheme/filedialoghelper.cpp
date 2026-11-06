@@ -231,7 +231,9 @@ bool FileDialogHelper::show(Qt::WindowFlags flags, Qt::WindowModality modality, 
 
     QString title = dialogOptions->windowTitle();
     if (title.isEmpty())
-        title = saveMode ? tr("Save File") : directoryMode ? tr("Open Folder") : tr("Open File");
+        title = saveMode ? QCoreApplication::translate("QFileDialog", "Save As")
+                        : directoryMode ? QCoreApplication::translate("QFileDialog", "Find Directory")
+                                        : QCoreApplication::translate("QFileDialog", "Open");
 
     QDBusMessage message = QDBusMessage::createMethodCall(
             portalService, portalPath, fileChooserInterface,
