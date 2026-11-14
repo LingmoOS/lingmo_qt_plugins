@@ -59,7 +59,6 @@ class MdiWindowShadowFactory;
 class Mnemonics;
 class ShadowHelper;
 class SplitterFactory;
-class WidgetExplorer;
 class WindowManager;
 class BlurHelper;
 class ToolsAreaManager;
@@ -566,9 +565,6 @@ private:
 
     //* signal manager for the tools area
     ToolsAreaManager *_toolsAreaManager = nullptr;
-
-    //* widget explorer
-    WidgetExplorer *_widgetExplorer = nullptr;
 
     //* tabbar data
     DarklyPrivate::TabBarData *_tabBarData = nullptr;

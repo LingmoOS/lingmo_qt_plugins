@@ -30,7 +30,6 @@
 #include "darklysplitterproxy.h"
 #include "darklystyleconfigdata.h"
 #include "darklytoolsareamanager.h"
-#include "darklywidgetexplorer.h"
 #include "darklywindowmanager.h"
 
 #include <KColorUtils>
@@ -186,7 +185,6 @@ Style::Style()
     , _mdiWindowShadowFactory(new MdiWindowShadowFactory(this))
     , _splitterFactory(new SplitterFactory(this))
     , _toolsAreaManager(new ToolsAreaManager(_helper, this))
-    , _widgetExplorer(new WidgetExplorer(this))
     , _tabBarData(new DarklyPrivate::TabBarData(this))
 #if DARKLY_HAVE_KSTYLE
     , SH_ArgbDndWindow(newStyleHint(QStringLiteral("SH_ArgbDndWindow")))
@@ -2400,8 +2398,6 @@ void Style::loadConfiguration()
         _frameFocusPrimitive = &Style::emptyPrimitive;
 
     // widget explorer
-    _widgetExplorer->setEnabled(StyleConfigData::widgetExplorerEnabled());
-    _widgetExplorer->setDrawWidgetRects(StyleConfigData::drawWidgetRects());
 }
 
 //___________________________________________________________________________________________________________________

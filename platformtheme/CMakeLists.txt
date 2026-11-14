@@ -89,15 +89,24 @@ install(TARGETS lingmoplatformtheme LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platf
 option(LINGMO_BUILD_DARKLY_STYLE "Build the vendored Darkly Qt Widgets style" ON)
 if(LINGMO_BUILD_DARKLY_STYLE)
     find_package(ECM 5.102 REQUIRED NO_MODULE)
-    find_package(KF6 REQUIRED COMPONENTS CoreAddons ColorScheme Config GuiAddons I18n IconThemes WindowSystem)
-    if(ECM_FOUND AND KF6_FOUND)
-        include(GenerateExportHeader)
-        include(KDEInstallDirs6)
-        include(KDECMakeSettings)
-        find_package(Qt6 REQUIRED COMPONENTS Quick QuickWidgets)
-        find_package(KF6FrameworkIntegration QUIET CONFIG)
-        find_package(KF6KCMUtils QUIET)
-        find_package(KF6KirigamiPlatform QUIET)
+    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+    # Debian and other distributions install one CMake package per Framework;
+    # there is no aggregate KF6Config.cmake to query all components at once.
+    find_package(KF6CoreAddons REQUIRED CONFIG)
+    find_package(KF6ColorScheme REQUIRED CONFIG)
+    find_package(KF6Config REQUIRED CONFIG)
+    find_package(KF6GuiAddons REQUIRED CONFIG)
+    find_package(KF6I18n REQUIRED CONFIG)
+    find_package(KF6IconThemes REQUIRED CONFIG)
+    find_package(KF6WindowSystem REQUIRED CONFIG)
+
+    include(GenerateExportHeader)
+    include(KDEInstallDirs6)
+    include(KDECMakeSettings)
+    find_package(Qt6 REQUIRED COMPONENTS Quick QuickWidgets)
+    find_package(KF6FrameworkIntegration QUIET CONFIG)
+    find_package(KF6KCMUtils QUIET CONFIG)
+    find_package(KF6KirigamiPlatform QUIET CONFIG)
 
         set(LINGMO_STYLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lingmo_style")
         set(LINGMO_STYLE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/lingmo_style")
@@ -152,12 +161,14 @@ if(LINGMO_BUILD_DARKLY_STYLE)
             lingmo_style/darklysettings.kcfgc
             lingmo_style/darklystyleconfigdata.kcfgc)
         add_library(darkly6lingmo MODULE ${LINGMO_STYLE_SRCS})
+        target_compile_features(darkly6lingmo PRIVATE cxx_std_20)
+        set_target_properties(darkly6lingmo PROPERTIES OUTPUT_NAME lingmostyle)
         target_include_directories(darkly6lingmo PRIVATE
             "${LINGMO_STYLE_DIR}"
             "${LINGMO_STYLE_DIR}/animations"
             "${LINGMO_STYLE_BINARY_DIR}")
         target_compile_definitions(darkly6lingmo PRIVATE
-            DARKLY_HAVE_KSTYLE=0 DARKLY_HAVE_QTQUICK=1 DARKLY_HAVE_X11=0 DARKLY_HAVE_KWAYLAND=0)
+            DARKLY_HAVE_KSTYLE=0 DARKLY_HAVE_X11=0 DARKLY_HAVE_KWAYLAND=0)
         target_link_libraries(darkly6lingmo PRIVATE
             Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus Qt6::Quick Qt6::QuickWidgets
             KF6::CoreAddons KF6::ColorScheme KF6::ConfigCore KF6::ConfigGui
@@ -166,9 +177,6 @@ if(LINGMO_BUILD_DARKLY_STYLE)
             target_link_libraries(darkly6lingmo PRIVATE KF6::Style)
         endif()
         install(TARGETS darkly6lingmo LIBRARY DESTINATION "${QT_PLUGINS_DIR}/styles")
-    else()
-        message(STATUS "Darkly style disabled: ECM and KF6 development packages were not found")
-    endif()
 endif()
 
 if(BUILD_TESTING)
