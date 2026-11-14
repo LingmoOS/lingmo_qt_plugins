@@ -29,7 +29,8 @@ namespace Darkly
 //_________________________________________________
 QStyle *StylePlugin::create(const QString &key)
 {
-    if (key.toLower() == QStringLiteral("darkly")) {
+    const QString normalized = key.toLower();
+    if (normalized == QStringLiteral("lingmo") || normalized == QStringLiteral("darkly")) {
         return new Style;
     }
     return nullptr;
@@ -38,7 +39,7 @@ QStyle *StylePlugin::create(const QString &key)
 //_________________________________________________
 QStringList StylePlugin::keys() const
 {
-    return QStringList(QStringLiteral("Darkly"));
+    return {QStringLiteral("Lingmo"), QStringLiteral("Darkly")};
 }
 
 }

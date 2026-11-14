@@ -20,6 +20,10 @@ The vendored `lingmo_style` Widgets plugin is built by default. Use
 `-DLINGMO_BUILD_DARKLY_STYLE=OFF` only when creating a reduced build without
 the style plugin.
 
+The platform theme advertises `Lingmo` as the first Qt Widgets style. To test
+an installed plugin in one process, run `QT_STYLE_OVERRIDE=Lingmo ark` or
+`QT_STYLE_OVERRIDE=Lingmo fcitx5-config-qt`.
+
 ## Build
 
 ```shell

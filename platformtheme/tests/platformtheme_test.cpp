@@ -124,6 +124,7 @@ private Q_SLOTS:
     void multipleSelectionSelectsNoSingleFile();
     void defaultMimeTypeIsAllFiles();
     void settingsChangeSurvivesAnEarlierSync();
+    void defaultStylePrefersLingmo();
 
 private:
     QDBusConnection m_portalBus = QDBusConnection(QString());
@@ -236,6 +237,14 @@ void PlatformThemeTest::settingsChangeSurvivesAnEarlierSync()
     QVERIFY(darkMode.wait(2000));
     QCOMPARE(darkMode.constFirst().constFirst().toBool(), true);
     QCOMPARE(hints.darkMode(), true);
+}
+
+void PlatformThemeTest::defaultStylePrefersLingmo()
+{
+    HintsSettings hints;
+    const QStringList styles = hints.hint(QPlatformTheme::StyleNames).toStringList();
+    QVERIFY(!styles.isEmpty());
+    QCOMPARE(styles.constFirst(), QStringLiteral("Lingmo"));
 }
 
 QTEST_MAIN(PlatformThemeTest)
