@@ -125,6 +125,7 @@ private Q_SLOTS:
     void defaultMimeTypeIsAllFiles();
     void settingsChangeSurvivesAnEarlierSync();
     void defaultStylePrefersLingmo();
+    void accentColorIsReadFromAppearanceSettings();
 
 private:
     QDBusConnection m_portalBus = QDBusConnection(QString());
@@ -245,6 +246,13 @@ void PlatformThemeTest::defaultStylePrefersLingmo()
     const QStringList styles = hints.hint(QPlatformTheme::StyleNames).toStringList();
     QVERIFY(!styles.isEmpty());
     QCOMPARE(styles.constFirst(), QStringLiteral("Lingmo"));
+}
+
+void PlatformThemeTest::accentColorIsReadFromAppearanceSettings()
+{
+    QVERIFY(writeSettings("[Appearance]\nAccentColor=5\n"));
+    HintsSettings hints;
+    QCOMPARE(hints.accentColor(), 5);
 }
 
 QTEST_MAIN(PlatformThemeTest)

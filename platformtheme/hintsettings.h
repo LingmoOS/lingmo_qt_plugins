@@ -26,6 +26,7 @@ public:
     qreal systemFontPointSize() const;
 
     bool darkMode();
+    int accentColor() const;
 
 public Q_SLOTS:
     void lazyInit();
@@ -39,6 +40,7 @@ Q_SIGNALS:
     void iconThemeChanged();
     void cursorThemeChanged();
     void darkModeChanged(bool darkMode);
+    void accentColorChanged(int accentColor);
 
 private:
     void onFileChanged(const QString &path);

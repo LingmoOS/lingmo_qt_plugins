@@ -16,6 +16,7 @@ static const QByteArray s_systemFontName = QByteArrayLiteral("Font");
 static const QByteArray s_systemFixedFontName = QByteArrayLiteral("FixedFont");
 static const QByteArray s_systemPointFontSize = QByteArrayLiteral("FontSize");
 static const QByteArray s_darkModeName = QByteArrayLiteral("DarkMode");
+static const QByteArray s_accentColorName = QByteArrayLiteral("AccentColor");
 static const QString s_defaultIconName = QStringLiteral("Lingmo");
 
 static QString availableFontFamily(const QString &requested, const QString &fallback)
@@ -131,6 +132,11 @@ bool HintsSettings::darkMode()
     return m_settings->value(s_darkModeName, false).toBool();
 }
 
+int HintsSettings::accentColor() const
+{
+    return m_settings->value(s_accentColorName, 0).toInt();
+}
+
 void HintsSettings::onFileChanged(const QString &path)
 {
     Q_UNUSED(path);
@@ -153,6 +159,8 @@ void HintsSettings::onFileChanged(const QString &path)
                 emit systemFontPointSizeChanged(newValue.toDouble());
             else if (value == s_darkModeName)
                 emit darkModeChanged(newValue.toBool());
+            else if (value == s_accentColorName)
+                emit accentColorChanged(newValue.toInt());
             else if (value == "IconTheme")
                 updateIconTheme();
         }

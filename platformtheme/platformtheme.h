@@ -29,6 +29,7 @@ public:
 private:
     void onFontChanged();
     void onIconThemeChanged();
+    void onPaletteChanged();
 
 private:
     HintsSettings *m_hints;

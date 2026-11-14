@@ -1,4 +1,4 @@
-lingmo-qt-plugins (5.0.8+lingmo5u1) unstable; urgency=medium
+lingmo-qt-plugins (5.0.9+lingmo5u1) unstable; urgency=medium
 
   * Vendor the Darkly Qt Widgets style source for platformtheme integration.
   * Keep KDE configuration, debug, window manager and decoration modules out
@@ -7,6 +7,7 @@ lingmo-qt-plugins (5.0.8+lingmo5u1) unstable; urgency=medium
   * Advertise Lingmo as the default Qt Widgets style for third-party apps.
   * Find KDE Frameworks through their distribution-provided component packages.
   * Remove the excluded widget explorer dependency from the vendored style.
+  * Use Lingmo window colors and appearance accent colors in Qt palettes.
 
  -- Lingmo OS Team <team@lingmo.org>  Sun, 15 Nov 2026 00:00:00 +0800
 
