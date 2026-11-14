@@ -83,13 +83,13 @@ endif()
 
 install(TARGETS lingmoplatformtheme LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
 
-# Darkly's original Qt Widgets style is vendored under lingmo_style.  It is
-# enabled only when the KDE Frameworks used by the upstream style are present;
-# the platform theme itself remains buildable on a plain Qt installation.
+# Darkly's original Qt Widgets style is vendored under lingmo_style and is
+# built by default. Set LINGMO_BUILD_DARKLY_STYLE=OFF only for a reduced build
+# that intentionally omits the Widgets style plugin.
 option(LINGMO_BUILD_DARKLY_STYLE "Build the vendored Darkly Qt Widgets style" ON)
 if(LINGMO_BUILD_DARKLY_STYLE)
-    find_package(ECM 5.102 QUIET NO_MODULE)
-    find_package(KF6 QUIET COMPONENTS CoreAddons ColorScheme Config GuiAddons I18n IconThemes WindowSystem)
+    find_package(ECM 5.102 REQUIRED NO_MODULE)
+    find_package(KF6 REQUIRED COMPONENTS CoreAddons ColorScheme Config GuiAddons I18n IconThemes WindowSystem)
     if(ECM_FOUND AND KF6_FOUND)
         include(GenerateExportHeader)
         include(KDEInstallDirs6)

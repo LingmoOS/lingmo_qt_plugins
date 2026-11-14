@@ -14,7 +14,11 @@ and decoration code are intentionally not part of this plugin repository.
 
 ## Dependencies
 
-`sudo pacman -S gcc cmake qt6-base qt6-declarative qt6-tools wayland wayland-protocols librsvg libheif libjxl`
+`sudo pacman -S gcc cmake extra-cmake-modules qt6-base qt6-declarative qt6-tools kf6-kcoreaddons kf6-kcolorscheme kf6-kconfig kf6-kguiaddons kf6-ki18n kf6-kiconthemes kf6-kwindowsystem wayland wayland-protocols librsvg libheif libjxl`
+
+The vendored `lingmo_style` Widgets plugin is built by default. Use
+`-DLINGMO_BUILD_DARKLY_STYLE=OFF` only when creating a reduced build without
+the style plugin.
 
 ## Build
 
