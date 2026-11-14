@@ -70,13 +70,17 @@ public:
     //* mouse over color
     QColor hoverColor(const QPalette &palette) const
     {
-        return _viewHoverBrush.brush(palette).color();
+        return palette.color(QPalette::Active, QPalette::Accent).isValid()
+            ? palette.color(QPalette::Active, QPalette::Accent)
+            : _viewHoverBrush.brush(palette).color();
     }
 
     //* focus color
     QColor focusColor(const QPalette &palette) const
     {
-        return _viewFocusBrush.brush(palette).color();
+        return palette.color(QPalette::Active, QPalette::Accent).isValid()
+            ? palette.color(QPalette::Active, QPalette::Accent)
+            : _viewFocusBrush.brush(palette).color();
     }
 
     //* negative text color (used for close button)
