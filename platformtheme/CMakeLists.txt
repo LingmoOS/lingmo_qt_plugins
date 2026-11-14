@@ -83,19 +83,93 @@ endif()
 
 install(TARGETS lingmoplatformtheme LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
 
-# Qt Widgets style extracted from Darkly's control painting. Keep it separate
-# from the QPA platform theme because Qt uses different plugin interfaces and
-# install locations for these two layers.
-add_library(lingmostyle MODULE
-    lingmo_style.cpp
-    lingmo_style.h
-    lingmo_style_plugin.cpp
-    lingmo_style_plugin.h
-    lingmo-style.json
-)
-set_target_properties(lingmostyle PROPERTIES AUTOMOC ON)
-target_link_libraries(lingmostyle PRIVATE Qt6::Widgets Qt6::Gui Qt6::Core)
-install(TARGETS lingmostyle LIBRARY DESTINATION "${QT_PLUGINS_DIR}/styles")
+# Darkly's original Qt Widgets style is vendored under darkly_style.  It is
+# enabled only when the KDE Frameworks used by the upstream style are present;
+# the platform theme itself remains buildable on a plain Qt installation.
+option(LINGMO_BUILD_DARKLY_STYLE "Build the vendored Darkly Qt Widgets style" ON)
+if(LINGMO_BUILD_DARKLY_STYLE)
+    find_package(ECM 5.102 QUIET NO_MODULE)
+    find_package(KF6 QUIET COMPONENTS CoreAddons ColorScheme Config GuiAddons I18n IconThemes WindowSystem)
+    if(ECM_FOUND AND KF6_FOUND)
+        include(GenerateExportHeader)
+        include(KDEInstallDirs6)
+        include(KDECMakeSettings)
+        find_package(Qt6 REQUIRED COMPONENTS Quick QuickWidgets)
+        find_package(KF6FrameworkIntegration QUIET CONFIG)
+        find_package(KF6KCMUtils QUIET)
+        find_package(KF6KirigamiPlatform QUIET)
+
+        set(DARKLY_STYLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/darkly_style")
+        set(DARKLY_STYLE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/darkly_style")
+        file(MAKE_DIRECTORY "${DARKLY_STYLE_BINARY_DIR}")
+        configure_file("${DARKLY_STYLE_DIR}/config-darkly.h.cmake"
+                       "${DARKLY_STYLE_BINARY_DIR}/config-darkly.h")
+
+        set(DARKLY_STYLE_SRCS
+            darkly_style/animations/darklyanimation.cpp
+            darkly_style/animations/darklyanimations.cpp
+            darkly_style/animations/darklyanimationdata.cpp
+            darkly_style/animations/darklybaseengine.cpp
+            darkly_style/animations/darklybusyindicatordata.cpp
+            darkly_style/animations/darklybusyindicatorengine.cpp
+            darkly_style/animations/darklydialdata.cpp
+            darkly_style/animations/darklydialengine.cpp
+            darkly_style/animations/darklyenabledata.cpp
+            darkly_style/animations/darklygenericdata.cpp
+            darkly_style/animations/darklyheaderviewdata.cpp
+            darkly_style/animations/darklyheaderviewengine.cpp
+            darkly_style/animations/darklyscrollbardata.cpp
+            darkly_style/animations/darklyscrollbarengine.cpp
+            darkly_style/animations/darklyspinboxdata.cpp
+            darkly_style/animations/darklyspinboxengine.cpp
+            darkly_style/animations/darklystackedwidgetdata.cpp
+            darkly_style/animations/darklystackedwidgetengine.cpp
+            darkly_style/animations/darklytabbardata.cpp
+            darkly_style/animations/darklytabbarengine.cpp
+            darkly_style/animations/darklytoolboxengine.cpp
+            darkly_style/animations/darklytransitiondata.cpp
+            darkly_style/animations/darklytransitionwidget.cpp
+            darkly_style/animations/darklywidgetstatedata.cpp
+            darkly_style/animations/darklywidgetstateengine.cpp
+            darkly_style/darklyaddeventfilter.cpp
+            darkly_style/darklyblurhelper.cpp
+            darkly_style/darklyboxshadowrenderer.cpp
+            darkly_style/darklyframeshadow.cpp
+            darkly_style/darklyhelper.cpp
+            darkly_style/darklymdiwindowshadow.cpp
+            darkly_style/darklymnemonics.cpp
+            darkly_style/darklypropertynames.cpp
+            darkly_style/darklyshadowhelper.cpp
+            darkly_style/darklysplitterproxy.cpp
+            darkly_style/darklystyle.cpp
+            darkly_style/darklystyleplugin.cpp
+            darkly_style/darklytileset.cpp
+            darkly_style/darklytoolsareamanager.cpp
+            darkly_style/darklywindowmanager.cpp
+        )
+
+        kconfig_add_kcfg_files(DARKLY_STYLE_SRCS
+            darkly_style/darklysettings.kcfgc
+            darkly_style/darklystyleconfigdata.kcfgc)
+        add_library(darkly6lingmo MODULE ${DARKLY_STYLE_SRCS})
+        target_include_directories(darkly6lingmo PRIVATE
+            "${DARKLY_STYLE_DIR}"
+            "${DARKLY_STYLE_DIR}/animations"
+            "${DARKLY_STYLE_BINARY_DIR}")
+        target_compile_definitions(darkly6lingmo PRIVATE
+            DARKLY_HAVE_KSTYLE=0 DARKLY_HAVE_QTQUICK=1 DARKLY_HAVE_X11=0 DARKLY_HAVE_KWAYLAND=0)
+        target_link_libraries(darkly6lingmo PRIVATE
+            Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus Qt6::Quick Qt6::QuickWidgets
+            KF6::CoreAddons KF6::ColorScheme KF6::ConfigCore KF6::ConfigGui
+            KF6::GuiAddons KF6::IconThemes KF6::WindowSystem)
+        if(TARGET KF6::Style)
+            target_link_libraries(darkly6lingmo PRIVATE KF6::Style)
+        endif()
+        install(TARGETS darkly6lingmo LIBRARY DESTINATION "${QT_PLUGINS_DIR}/styles")
+    else()
+        message(STATUS "Darkly style disabled: ECM and KF6 development packages were not found")
+    endif()
+endif()
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

@@ -49,8 +49,7 @@ HintsSettings::HintsSettings(QObject *parent)
     m_iconTheme = m_settings->value("IconTheme", s_defaultIconName).toString();
     updateIconThemeHint();
 
-    m_hints[QPlatformTheme::StyleNames] = QStringList {QStringLiteral("Lingmo"),
-                                                        QStringLiteral("Fusion")};
+    m_hints[QPlatformTheme::StyleNames] = QStringList {QStringLiteral("Fusion")};
     m_hints[QPlatformTheme::SystemIconFallbackThemeName] = QStringLiteral("hicolor");
     m_hints[QPlatformTheme::IconThemeSearchPaths] = xdgIconThemePaths();
     m_hints[QPlatformTheme::UseFullScreenForPopupMenu] = false;

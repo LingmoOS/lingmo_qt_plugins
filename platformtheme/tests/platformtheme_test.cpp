@@ -4,7 +4,6 @@
 
 #include "filedialoghelper.h"
 #include "hintsettings.h"
-#include "lingmo_style.h"
 
 #include <QDBusArgument>
 #include <QDBusConnection>
@@ -18,7 +17,6 @@
 #include <QSignalSpy>
 #include <QStandardPaths>
 #include <QTest>
-#include <QStyleFactory>
 
 struct PortalRule {
     uint type = 0;
@@ -126,7 +124,6 @@ private Q_SLOTS:
     void multipleSelectionSelectsNoSingleFile();
     void defaultMimeTypeIsAllFiles();
     void settingsChangeSurvivesAnEarlierSync();
-    void lingmoStyleProvidesDarklyCompatibilityKey();
 
 private:
     QDBusConnection m_portalBus = QDBusConnection(QString());
@@ -239,13 +236,6 @@ void PlatformThemeTest::settingsChangeSurvivesAnEarlierSync()
     QVERIFY(darkMode.wait(2000));
     QCOMPARE(darkMode.constFirst().constFirst().toBool(), true);
     QCOMPARE(hints.darkMode(), true);
-}
-
-void PlatformThemeTest::lingmoStyleProvidesDarklyCompatibilityKey()
-{
-    LingmoStyle style;
-    QVERIFY(style.pixelMetric(QStyle::PM_ScrollBarExtent) > 0);
-    QVERIFY(QStyleFactory::keys().contains(QStringLiteral("Fusion")));
 }
 
 QTEST_MAIN(PlatformThemeTest)

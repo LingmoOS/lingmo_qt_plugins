@@ -6,12 +6,11 @@ icon and cursor themes, open the Lingmo file chooser, and scroll with the
 same touchpad feel as Lingmo's own apps. The image format plugins add SVG,
 HEIF/HEIC/AVIF and JPEG XL.
 
-The platform theme also installs a Qt Widgets style plugin named `Lingmo`.
-It provides palette-aware rounded controls for buttons, menus, fields,
-checkboxes, progress bars and scrollbars. `Darkly` remains an alias for
-applications that already request that style. KDE window decorations, KDE
-configuration modules, DBus integration and animation/shadow helpers are
-intentionally excluded.
+The repository vendors the Qt Widgets painting source from Darkly under
+`platformtheme/darkly_style`. It is kept separate from the QPA platform theme:
+the copied source can be enabled when the KDE Frameworks development packages
+are available, while KDE configuration modules, debug tools, window managers
+and decoration code are intentionally not part of this plugin repository.
 
 ## Dependencies
 
@@ -25,12 +24,6 @@ cd build
 cmake ..
 make
 sudo make install
-```
-
-For a per-process preview:
-
-```shell
-QT_QPA_PLATFORMTHEME=lingmo QT_STYLE_OVERRIDE=Lingmo your-qt-application
 ```
 
 ## License
