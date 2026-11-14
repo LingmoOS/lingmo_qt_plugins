@@ -83,7 +83,7 @@ endif()
 
 install(TARGETS lingmoplatformtheme LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
 
-# Darkly's original Qt Widgets style is vendored under darkly_style.  It is
+# Darkly's original Qt Widgets style is vendored under lingmo_style.  It is
 # enabled only when the KDE Frameworks used by the upstream style are present;
 # the platform theme itself remains buildable on a plain Qt installation.
 option(LINGMO_BUILD_DARKLY_STYLE "Build the vendored Darkly Qt Widgets style" ON)
@@ -99,63 +99,63 @@ if(LINGMO_BUILD_DARKLY_STYLE)
         find_package(KF6KCMUtils QUIET)
         find_package(KF6KirigamiPlatform QUIET)
 
-        set(DARKLY_STYLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/darkly_style")
-        set(DARKLY_STYLE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/darkly_style")
-        file(MAKE_DIRECTORY "${DARKLY_STYLE_BINARY_DIR}")
-        configure_file("${DARKLY_STYLE_DIR}/config-darkly.h.cmake"
-                       "${DARKLY_STYLE_BINARY_DIR}/config-darkly.h")
+        set(LINGMO_STYLE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/lingmo_style")
+        set(LINGMO_STYLE_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/lingmo_style")
+        file(MAKE_DIRECTORY "${LINGMO_STYLE_BINARY_DIR}")
+        configure_file("${LINGMO_STYLE_DIR}/config-darkly.h.cmake"
+                       "${LINGMO_STYLE_BINARY_DIR}/config-darkly.h")
 
-        set(DARKLY_STYLE_SRCS
-            darkly_style/animations/darklyanimation.cpp
-            darkly_style/animations/darklyanimations.cpp
-            darkly_style/animations/darklyanimationdata.cpp
-            darkly_style/animations/darklybaseengine.cpp
-            darkly_style/animations/darklybusyindicatordata.cpp
-            darkly_style/animations/darklybusyindicatorengine.cpp
-            darkly_style/animations/darklydialdata.cpp
-            darkly_style/animations/darklydialengine.cpp
-            darkly_style/animations/darklyenabledata.cpp
-            darkly_style/animations/darklygenericdata.cpp
-            darkly_style/animations/darklyheaderviewdata.cpp
-            darkly_style/animations/darklyheaderviewengine.cpp
-            darkly_style/animations/darklyscrollbardata.cpp
-            darkly_style/animations/darklyscrollbarengine.cpp
-            darkly_style/animations/darklyspinboxdata.cpp
-            darkly_style/animations/darklyspinboxengine.cpp
-            darkly_style/animations/darklystackedwidgetdata.cpp
-            darkly_style/animations/darklystackedwidgetengine.cpp
-            darkly_style/animations/darklytabbardata.cpp
-            darkly_style/animations/darklytabbarengine.cpp
-            darkly_style/animations/darklytoolboxengine.cpp
-            darkly_style/animations/darklytransitiondata.cpp
-            darkly_style/animations/darklytransitionwidget.cpp
-            darkly_style/animations/darklywidgetstatedata.cpp
-            darkly_style/animations/darklywidgetstateengine.cpp
-            darkly_style/darklyaddeventfilter.cpp
-            darkly_style/darklyblurhelper.cpp
-            darkly_style/darklyboxshadowrenderer.cpp
-            darkly_style/darklyframeshadow.cpp
-            darkly_style/darklyhelper.cpp
-            darkly_style/darklymdiwindowshadow.cpp
-            darkly_style/darklymnemonics.cpp
-            darkly_style/darklypropertynames.cpp
-            darkly_style/darklyshadowhelper.cpp
-            darkly_style/darklysplitterproxy.cpp
-            darkly_style/darklystyle.cpp
-            darkly_style/darklystyleplugin.cpp
-            darkly_style/darklytileset.cpp
-            darkly_style/darklytoolsareamanager.cpp
-            darkly_style/darklywindowmanager.cpp
+        set(LINGMO_STYLE_SRCS
+            lingmo_style/animations/darklyanimation.cpp
+            lingmo_style/animations/darklyanimations.cpp
+            lingmo_style/animations/darklyanimationdata.cpp
+            lingmo_style/animations/darklybaseengine.cpp
+            lingmo_style/animations/darklybusyindicatordata.cpp
+            lingmo_style/animations/darklybusyindicatorengine.cpp
+            lingmo_style/animations/darklydialdata.cpp
+            lingmo_style/animations/darklydialengine.cpp
+            lingmo_style/animations/darklyenabledata.cpp
+            lingmo_style/animations/darklygenericdata.cpp
+            lingmo_style/animations/darklyheaderviewdata.cpp
+            lingmo_style/animations/darklyheaderviewengine.cpp
+            lingmo_style/animations/darklyscrollbardata.cpp
+            lingmo_style/animations/darklyscrollbarengine.cpp
+            lingmo_style/animations/darklyspinboxdata.cpp
+            lingmo_style/animations/darklyspinboxengine.cpp
+            lingmo_style/animations/darklystackedwidgetdata.cpp
+            lingmo_style/animations/darklystackedwidgetengine.cpp
+            lingmo_style/animations/darklytabbardata.cpp
+            lingmo_style/animations/darklytabbarengine.cpp
+            lingmo_style/animations/darklytoolboxengine.cpp
+            lingmo_style/animations/darklytransitiondata.cpp
+            lingmo_style/animations/darklytransitionwidget.cpp
+            lingmo_style/animations/darklywidgetstatedata.cpp
+            lingmo_style/animations/darklywidgetstateengine.cpp
+            lingmo_style/darklyaddeventfilter.cpp
+            lingmo_style/darklyblurhelper.cpp
+            lingmo_style/darklyboxshadowrenderer.cpp
+            lingmo_style/darklyframeshadow.cpp
+            lingmo_style/darklyhelper.cpp
+            lingmo_style/darklymdiwindowshadow.cpp
+            lingmo_style/darklymnemonics.cpp
+            lingmo_style/darklypropertynames.cpp
+            lingmo_style/darklyshadowhelper.cpp
+            lingmo_style/darklysplitterproxy.cpp
+            lingmo_style/darklystyle.cpp
+            lingmo_style/darklystyleplugin.cpp
+            lingmo_style/darklytileset.cpp
+            lingmo_style/darklytoolsareamanager.cpp
+            lingmo_style/darklywindowmanager.cpp
         )
 
-        kconfig_add_kcfg_files(DARKLY_STYLE_SRCS
-            darkly_style/darklysettings.kcfgc
-            darkly_style/darklystyleconfigdata.kcfgc)
-        add_library(darkly6lingmo MODULE ${DARKLY_STYLE_SRCS})
+        kconfig_add_kcfg_files(LINGMO_STYLE_SRCS
+            lingmo_style/darklysettings.kcfgc
+            lingmo_style/darklystyleconfigdata.kcfgc)
+        add_library(darkly6lingmo MODULE ${LINGMO_STYLE_SRCS})
         target_include_directories(darkly6lingmo PRIVATE
-            "${DARKLY_STYLE_DIR}"
-            "${DARKLY_STYLE_DIR}/animations"
-            "${DARKLY_STYLE_BINARY_DIR}")
+            "${LINGMO_STYLE_DIR}"
+            "${LINGMO_STYLE_DIR}/animations"
+            "${LINGMO_STYLE_BINARY_DIR}")
         target_compile_definitions(darkly6lingmo PRIVATE
             DARKLY_HAVE_KSTYLE=0 DARKLY_HAVE_QTQUICK=1 DARKLY_HAVE_X11=0 DARKLY_HAVE_KWAYLAND=0)
         target_link_libraries(darkly6lingmo PRIVATE

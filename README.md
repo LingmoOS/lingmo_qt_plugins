@@ -7,7 +7,7 @@ same touchpad feel as Lingmo's own apps. The image format plugins add SVG,
 HEIF/HEIC/AVIF and JPEG XL.
 
 The repository vendors the Qt Widgets painting source from Darkly under
-`platformtheme/darkly_style`. It is kept separate from the QPA platform theme:
+`platformtheme/lingmo_style`. It is kept separate from the QPA platform theme:
 the copied source can be enabled when the KDE Frameworks development packages
 are available, while KDE configuration modules, debug tools, window managers
 and decoration code are intentionally not part of this plugin repository.

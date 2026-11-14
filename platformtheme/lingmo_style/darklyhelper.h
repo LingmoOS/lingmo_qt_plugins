@@ -1,5 +1,5 @@
-#ifndef darkly_helper_h
-#define darkly_helper_h
+#ifndef lingmo_helper_h
+#define lingmo_helper_h
 
 /*************************************************************************
  * Copyright (C) 2014 by Hugo Pereira Da Costa <hugo.pereira@free.fr>    *

@@ -28,9 +28,9 @@ const char PropertyNames::netWMForceShadow[] = "_KDE_NET_WM_FORCE_SHADOW";
 const char PropertyNames::netWMSkipShadow[] = "_KDE_NET_WM_SKIP_SHADOW";
 const char PropertyNames::sidePanelView[] = "_kde_side_panel_view";
 const char PropertyNames::toolButtonAlignment[] = "_kde_toolButton_alignment";
-const char PropertyNames::menuTitle[] = "_darkly_toolButton_menutitle";
-const char PropertyNames::alteredBackground[] = "_darkly_altered_background";
+const char PropertyNames::menuTitle[] = "_lingmo_toolButton_menutitle";
+const char PropertyNames::alteredBackground[] = "_lingmo_altered_background";
 const char PropertyNames::forceFrame[] = "_breeze_force_frame";
 const char PropertyNames::bordersSides[] = "_breeze_borders_sides";
-const char PropertyNames::noSeparator[] = "_darkly_no_separator";
+const char PropertyNames::noSeparator[] = "_lingmo_no_separator";
 }

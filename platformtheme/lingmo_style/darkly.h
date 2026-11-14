@@ -1,5 +1,5 @@
-#ifndef darkly_h
-#define darkly_h
+#ifndef lingmo_h
+#define lingmo_h
 
 /*************************************************************************
  * Copyright (C) 2014 by Hugo Pereira Da Costa <hugo.pereira@free.fr>    *

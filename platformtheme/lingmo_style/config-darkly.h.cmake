@@ -19,8 +19,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
-#ifndef config_darkly_h
-#define config_darkly_h
+#ifndef config_lingmo_h
+#define config_lingmo_h
 
 /* Define to 1 if QtQuick is available */
 #cmakedefine01 DARKLY_HAVE_QTQUICK

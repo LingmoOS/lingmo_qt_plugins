@@ -1,4 +1,4 @@
-lingmo-qt-plugins (5.0.3+lingmo5u1) unstable; urgency=medium
+lingmo-qt-plugins (5.0.4+lingmo5u1) unstable; urgency=medium
 
   * Vendor the Darkly Qt Widgets style source for platformtheme integration.
   * Keep KDE configuration, debug, window manager and decoration modules out

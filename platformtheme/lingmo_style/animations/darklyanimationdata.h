@@ -1,5 +1,5 @@
-#ifndef darkly_animationdata_h
-#define darkly_animationdata_h
+#ifndef lingmo_animationdata_h
+#define lingmo_animationdata_h
 
 /*************************************************************************
  * Copyright (C) 2014 by Hugo Pereira Da Costa <hugo.pereira@free.fr>    *
