@@ -5,11 +5,13 @@ add_executable(platformtheme-test
     ../filedialoghelper.cpp
     ../hintsettings.cpp
     ../waylandexport.cpp
+    ../lingmo_style.cpp
 )
 target_include_directories(platformtheme-test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_link_libraries(platformtheme-test PRIVATE
     Qt6::GuiPrivate
     Qt6::DBus
+    Qt6::Widgets
     Qt6::Test
 )
 add_test(NAME platformtheme-test COMMAND platformtheme-test)

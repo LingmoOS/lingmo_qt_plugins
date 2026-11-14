@@ -83,6 +83,20 @@ endif()
 
 install(TARGETS lingmoplatformtheme LIBRARY DESTINATION "${QT_PLUGINS_DIR}/platformthemes")
 
+# Qt Widgets style extracted from Darkly's control painting. Keep it separate
+# from the QPA platform theme because Qt uses different plugin interfaces and
+# install locations for these two layers.
+add_library(lingmostyle MODULE
+    lingmo_style.cpp
+    lingmo_style.h
+    lingmo_style_plugin.cpp
+    lingmo_style_plugin.h
+    lingmo-style.json
+)
+set_target_properties(lingmostyle PROPERTIES AUTOMOC ON)
+target_link_libraries(lingmostyle PRIVATE Qt6::Widgets Qt6::Gui Qt6::Core)
+install(TARGETS lingmostyle LIBRARY DESTINATION "${QT_PLUGINS_DIR}/styles")
+
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
